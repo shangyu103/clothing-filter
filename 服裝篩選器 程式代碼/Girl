@@ -1,0 +1,179 @@
+main.cpp
+
+#include "Girl.h"
+#include<iostream>
+#include<string>
+using namespace std;
+int main() {
+	cout << "請選擇性別,男生按1,女生按2" << endl;
+	int sex; cin >> sex;
+	cout << "依序輸入->胸圍->腰圍->臀圍" << endl;
+	double c, w, h; cin >> c >> w >> h;
+	Girl P1(c, w, h);
+	int body = P1.getBody(c, w, h);
+	P1.setBody(body);
+	cout << "以下是關於身型的建議" << endl << endl;
+	P1.setStyle(body);
+	cout << "接著輸入身高給予建議的尺寸" << endl;
+	double height; cin >> height;
+	P1.setSize(height);
+	cout << endl << " 謝謝使用" << endl;
+}
+
+
+Girl.cpp
+
+#include "Girl.h"
+#include<iostream>
+#include<string>
+using namespace std;
+Girl::Girl(double chest, double waist, double hip) {
+    (*this).chest = chest;
+    (*this).waist = waist;
+    (*this).hip = hip;
+}
+Girl::Girl(double shouIder, double chest, double waist, double hip, double back) {
+    this->shouIder = shouIder;
+    this->chest = chest;
+    this->waist = waist;
+    this->hip = hip;
+    this->back = back;
+}
+int Girl::getBody(double chest, double waist, double hip) {
+    if (waist / hip < 0.65 && waist / chest>0.9)return 1;//pear梨形
+    else if (waist / hip > 0.75 && waist / hip < 0.9 && waist / chest>0.75 && waist / chest < 0.9)return 2;//H
+    else if (waist / hip > 0.65 && waist / hip < 0.75 && waist / chest>0.65 && waist / chest < 0.75)return 3; //hourglass沙漏
+    else if (waist / chest > 0.65 && waist / chest < 0.75 && hip < waist)return 4;//triangle
+    else if (waist / hip > 0.9 && waist / chest > 0.9)return 5;//apple
+    else return 6;
+}
+void Girl::setBody(int body) {
+    switch (body)
+    {
+    case 1:cout << "pear身型為梨型" << endl;
+        cout << "   ***   " << endl;
+        cout << "  ***** " << endl;
+        cout << "   ***   " << endl;
+        cout << "  *****  " << endl;
+        cout << " ******* " << endl;
+        cout << " ******* " << endl;
+        cout << " ******* " << endl;
+        cout << "  *****  " << endl;
+        cout << "   ***   " << endl;
+        break;
+    case 2:cout << "身型為H型" << endl << endl;
+        for (int j = 0; j < 9; j++) {
+            for (int i = 0; i < 9; i++) {
+                if (j == 4)cout << "*";
+            }if (j != 4)cout << "*       *"; cout << endl;
+        }
+        ; break;
+    case 3:cout << "hourglass身型為沙漏型" << endl;
+        for (int c = 0; c <= 4; c++) {
+            for (int a = 1; a <= c; a++) {
+                cout << " ";
+            }
+            for (int b = 1; b <= 9 - 2 * c; b++) {
+                cout << "*";
+            }cout << endl;
+        }
+        for (int c = 4; c >= 0; c--) {
+            for (int a = 1; a <= c; a++) {
+                cout << " ";
+            }
+            for (int b = 1; b <= 9 - 2 * c; b++) {
+                cout << "*";
+            }cout << endl;
+        }
+        break;
+    case 4:cout << "triangle身型為倒三角身型" << endl;
+        for (int c = 0; c <= 4; c++) {
+            for (int a = 1; a <= c; a++) {
+                cout << " ";
+            }
+            for (int b = 1; b <= 9 - 2 * c; b++) {
+                cout << "*";
+            }cout << endl;
+        }
+        break;
+    case 5:cout << "apple身型為蘋果型" << endl;
+        cout << "   ***   " << endl;
+        cout << "  *****  " << endl;
+        cout << " ******* " << endl;
+        cout << " ******* " << endl;
+        cout << " ******* " << endl;
+        cout << " ******* " << endl;
+        cout << " ******* " << endl;
+        cout << "  *****  " << endl;
+        cout << "   ***   " << endl;
+        break;
+    default:cout << "無法判定身型" << endl; break;
+    }
+}
+
+void  Girl::setStyle(int body) {
+    switch (body)
+    {
+    case 1:cout << "缺點 : 肩膀窄，腰細臀部有肉，褲子不好找。" << endl << "優點 : 身材曲線明顯，給人感覺較性感。" << endl
+        << "適合款式 : 傘裙，A字版型裙子，寬鬆微挺西裝褲，喇叭褲。" << endl
+        << "不適合款式 : 貼身長褲，花苞裙，不夠寬鬆太軟的牛仔褲。" << endl << endl; break;
+    case 2:cout << "缺點 : 無腰線，身材部曲線不明顯，身材無份量。優點 : 穿衣雷點較少。" << endl
+        << "適合款式 : 有墊肩的上衣、外套，收腰系列服裝，傘狀洋裝、喇叭褲。" << endl
+        << "不適合款式 : 完全貼身的洋裝、長褲。" << endl << endl; break;
+    case 3:cout << "缺點 : 胸部豐滿身材曲線明顯，容易過於性感或老成。" << endl
+        << "優點 : 幾乎能夠駕馭所有款式，身材比例接近完美。" << endl
+        << "不適合款式 : 直筒長洋裝" << endl << endl; break;
+    case 4:cout << "缺點:肩膀較寬，容易顯壯。" << endl
+        << "優點 : 很好撐起衣服不會顯得沒精神、腿部纖細。" << endl << endl
+        << "適合款式 : A字版型裙子、短褲，花苞裙，寬褲，西裝外套，長洋裝，大領口上衣。" << endl
+        << "不適合款式 :高領、削肩、泡泡袖。" << endl
+        << "重點 : 把臀部凸顯出來讓臀部與肩同寬，弱化肩寬，整體看起來會非常修飾且顯瘦。" << endl << endl; break;
+    case 5:cout << "缺點 : 胸腰臀豐滿，腰圍比臀為明顯，容易看起來臃腫。優點 : 四肢纖細，很好藏肉。" << endl
+        << "適合款式 : 收腰款式，墊肩款式，藏肚子款式，喇叭褲。" << endl
+        << "不適合款式 : 柔軟寬鬆露出腰的所有款式，直筒版型，貼身上衣。" << endl << endl; break;
+    default:break;
+    }
+}
+void Girl::setSize(double height) {
+    if (height <= 157) {
+        cout << endl << "建議尺寸為 XS" << endl;
+    }
+    else if (height > 157 && height < 163) {
+        cout << endl << "建議尺寸為 S" << endl;
+    }
+    else if (height < 168 && height >= 163) {
+        cout << endl << "建議尺寸為 M" << endl;
+    }
+    else if (height >= 168 && height < 173) {
+        cout << endl << "建議尺寸為 L" << endl;
+    }
+    else if (height >= 173) {
+        cout << endl << "建議尺寸為 XL" << endl;
+    }
+}
+Girl.h
+
+#ifndef  GIRL_H
+#define GIRL_H
+#include<string>
+class Girl {
+private:
+	double shouIder;
+	double chest;
+	double waist;
+	double hip;
+	double back;
+	double height;
+	int body;
+
+public:
+	Girl(double, double, double);
+	Girl(double, double, double, double, double);
+	int getBody(double, double, double);
+	void setBody(int);
+	void  setStyle(int);
+	void  setSize(double);
+
+};
+#endif
+
