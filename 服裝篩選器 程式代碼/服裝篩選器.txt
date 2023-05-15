@@ -1,0 +1,217 @@
+main.cpp
+
+#include<iostream>
+#include<iomanip>
+#include"boysize.h"
+#include"boyType.h"
+using namespace std;
+
+void gender(int n) {
+	double s1, c1, w1, h1, he1, s2, c2, w2, h2, he2;
+	cin >> n;
+	
+	if (n != 1 && n != 2) {
+		gender(n);
+	}
+	else if(n==1){
+		cout << "請輸入肩寬" << endl;
+		cin >> s1;
+		cout << "請輸入胸圍" << endl;
+		cin >> c1;
+		cout << "請輸入腰圍" << endl;
+		cin >> w1;
+		cout << "請輸入臀圍" << endl;
+		cin >> h1;
+		cout << "請輸入身高" << endl;
+		cin >> he1;
+		Boy B(s1, c1, w1, h1, he1);
+		B.sizeCalculation();
+	}
+	else {
+		cout << "請輸入肩寬" << endl;
+		cin >> s2;
+		cout << "請輸入胸圍" << endl;
+		cin >> c2;
+		cout << "請輸入腰圍" << endl;
+		cin >> w2;
+		cout << "請輸入臀圍" << endl;
+		cin >> h2;
+		cout << "請輸入身高" << endl;
+		cin >> he2;
+		
+	}
+
+}
+
+int main() {
+	int n=1;
+	
+	cout << "請輸入你的性別!" << endl;
+	cout<<"如果你是男性，請輸入1"<<endl<<"如果你是女性，請輸入2"<<endl;
+
+	gender(n);
+}
+
+
+boysize.cpp
+
+#include"boysize.h"
+
+Boy::Boy() {
+	shoulder = 1;
+	chest = 1;
+	walstline = 1;
+	hip = 1;
+	height = 1;
+}
+Boy::Boy(double newShoulder, double newChest, double newWalstline, double newHip, double newHeight) {
+	shoulder = newShoulder;
+	chest = newChest;
+	walstline = newWalstline;
+	hip = newHip;
+	height = newHeight;
+}
+void Boy::setShoulderWider(double newShoulder) {
+	shoulder = newShoulder;
+}
+double Boy::getShoulderWider() {
+	return shoulder;
+}
+void Boy::setChestCircumference(double newChest) {
+	chest = newChest;
+}
+double Boy::getChestCircumference() {
+	return chest;
+}
+void Boy::setWalstline(double newWalstline) {
+	walstline = newWalstline;
+}
+double Boy::getWalstline() {
+	return walstline;
+}
+void Boy::setHipCircumference(double newHip) {
+	hip = newHip;
+}
+double Boy::getHipCircumference() {
+	return hip;
+}
+void Boy::setHeight(double newHeight) {
+	height = newHeight;
+}
+double Boy::getHeight() {
+	return height;
+}
+void Boy::sizeCalculation() {
+	double n = 0;
+	int a;
+	n = walstline / hip*1.0;
+	if (n < 0.9) {
+		cout << "你是倒梯形身材" << endl;
+		a = 1;
+	}
+	if (n >= 0.9 && n <= 1.0) {
+		cout << "你是矩形身材" << endl;
+		a = 2;
+	}
+	if (n > 1.0) {
+		cout << "你是橢圓形身材" << endl;
+		a = 3;
+	}
+	SML();
+
+}
+void Boy::SML() {
+	int x = 0, y = 0, z = 0;
+	int S = 1, M = 2, L = 3, XL = 4;
+	if (getHeight() <= 168) {
+		x = S;
+	}
+	if (getHeight() > 168&&getHeight()<=175) {
+		x = M;
+	}
+	if (getHeight() > 175 && getHeight() <= 181) {
+		x = L;
+	}
+	if (getHeight() >181) {
+		x = XL;
+	}
+	if (getChestCircumference() <= 91) {
+		y = S;
+	}
+	if (getChestCircumference() > 91 && getChestCircumference() <= 96) {
+		y = M;
+	}
+	if (getChestCircumference() > 96 && getChestCircumference() <= 101) {
+		y = L;
+	}
+	if (getChestCircumference() > 101 ) {
+		y = XL;
+	}
+	if (getWalstline() <= 77) {
+		z = S;
+	}
+	if (getWalstline() > 77 && getWalstline() <= 82) {
+		z = M;
+	}
+	if (getWalstline() > 82 && getWalstline() <= 87) {
+		z = L;
+	}
+	if (getWalstline() > 88) {
+		z = XL;
+	}
+	int n = x;
+	if (y>n) {
+		n = y;
+	}
+	if (z>n) {
+		n = z;
+	}
+	if (n == 1) {
+		cout << "你的尺碼為:S" << endl;
+	}
+	else if (n == 2) {
+		cout << "你的尺碼為:M" << endl;
+	}
+	else if (n == 3) {
+		cout << "你的尺碼為:L" << endl;
+	}
+	else if (n == 4) {
+		cout << "你的尺碼為:XL" << endl;
+	}
+
+}
+
+Boysize.h
+
+#ifndef HI
+#define HI
+#include<iostream>
+#include<iomanip>
+using namespace std;
+class Boy {
+public:
+	Boy();
+	Boy (double,double,double,double,double);
+	void setShoulderWider(double);
+	double getShoulderWider();
+	void setChestCircumference(double);
+	double getChestCircumference();
+	void setWalstline(double);
+	double getWalstline();
+	void setHipCircumference(double);
+	double getHipCircumference();
+	void setHeight(double);
+	double getHeight();
+	void sizeCalculation();
+	void SML();
+private:
+	double shoulder;
+	double chest;
+	double walstline;
+	double hip;
+	double height;
+};
+
+#endif
+
+
