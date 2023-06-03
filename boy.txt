@@ -1,0 +1,337 @@
+main.cpp
+
+#include<iostream>
+#include<iomanip>
+#include"boysize.h"
+#include"boyType.h"
+using namespace std;
+
+void clothing(int t) {
+ 
+ cin >> t;
+ if (t == 1||t==2) {
+  Type T(t);
+  
+ }
+ else if (t != 1 && t != 2) {
+  cout << "請輸入正確服裝類型!" << endl;
+  clothing(t);
+ }
+}
+
+void gender(int n) {
+ double s1, c1, w1, h1, he1, s2, c2, w2, h2, he2;
+ cin >> n;
+ 
+ if (n != 1 && n != 2) {
+  cout << "請輸入正確性別" << endl;
+  gender(n);
+ }
+ else if(n==1){
+  cout << "請輸入肩寬" << endl;
+  cin >> s1;
+  cout << "請輸入胸圍" << endl;
+  cin >> c1;
+  cout << "請輸入腰圍" << endl;
+  cin >> w1;
+  cout << "請輸入臀圍" << endl;
+  cin >> h1;
+  cout << "請輸入身高" << endl;
+  cin >> he1;
+  Boy B(s1, c1, w1, h1, he1);
+  B.sizeCalculation();
+ }
+ else {
+  cout << "請輸入肩寬" << endl;
+  cin >> s2;
+  cout << "請輸入胸圍" << endl;
+  cin >> c2;
+  cout << "請輸入腰圍" << endl;
+  cin >> w2;
+  cout << "請輸入臀圍" << endl;
+  cin >> h2;
+  cout << "請輸入身高" << endl;
+  cin >> he2;
+  
+ }
+
+}
+
+int main() {
+ int t=0;
+ int s=1;
+
+ cout << "請輸入你想篩選的服裝類型!" << endl << "如果你想篩選衣服，請輸入1" << endl << "如果你想篩選褲子，請輸入2" << endl;
+ clothing(t);
+
+ cout << "請輸入你的性別!" << endl;
+ cout<<"如果你是男性，請輸入1"<<endl<<"如果你是女性，請輸入2"<<endl;
+
+ gender(s);
+ 
+}
+
+
+
+boysize.h
+
+#ifndef HI
+#define HI
+#include<iostream>
+#include<iomanip>
+using namespace std;
+class Boy {
+public:
+ Boy();
+ Boy (double,double,double,double,double);
+ void setShoulderWider(double);
+ double getShoulderWider();
+ void setChestCircumference(double);
+ double getChestCircumference();
+ void setWalstline(double);
+ double getWalstline();
+ void setHipCircumference(double);
+ double getHipCircumference();
+ void setHeight(double);
+ double getHeight();
+ void sizeCalculation();
+ void SML();
+private:
+ double shoulder;
+ double chest;
+ double walstline;
+ double hip;
+ double height;
+};
+
+#endif
+
+boysize.cpp
+
+#include"boysize.h"
+#include"boyType.h"
+Boy::Boy() {
+ shoulder = 1;
+ chest = 1;
+ walstline = 1;
+ hip = 1;
+ height = 1;
+}
+Boy::Boy(double newShoulder, double newChest, double newWalstline, double newHip, double newHeight) {
+ shoulder = newShoulder;
+ chest = newChest;
+ walstline = newWalstline;
+ hip = newHip;
+ height = newHeight;
+}
+void Boy::setShoulderWider(double newShoulder) {
+ shoulder = newShoulder;
+}
+double Boy::getShoulderWider() {
+ return shoulder;
+}
+void Boy::setChestCircumference(double newChest) {
+ chest = newChest;
+}
+double Boy::getChestCircumference() {
+ return chest;
+}
+void Boy::setWalstline(double newWalstline) {
+ walstline = newWalstline;
+}
+double Boy::getWalstline() {
+ return walstline;
+}
+void Boy::setHipCircumference(double newHip) {
+ hip = newHip;
+}
+double Boy::getHipCircumference() {
+ return hip;
+}
+void Boy::setHeight(double newHeight) {
+ height = newHeight;
+}
+double Boy::getHeight() {
+ return height;
+}
+void Boy::sizeCalculation() {
+ double n = 0;
+ int a;
+ int b=0;
+ n = walstline / hip*1.0;
+ if (n < 0.9) {
+  cout << "你是倒梯形身材" << endl;
+  a = 1;
+ }
+ if (n >= 0.9 && n <= 1.0) {
+  cout << "你是矩形身材" << endl;
+  a = 2;
+ }
+ if (n > 1.0) {
+  cout << "你是橢圓形身材" << endl;
+  a = 3;
+ }
+ b = a;
+
+ SML();
+ Type B;
+ if (b == 1) {
+  B.invertedTrapezoid();
+ }
+ if (b == 2) {
+  B.rectangle();
+ }
+ if (b == 3) {
+  B.oval();
+ }
+
+}
+void Boy::SML() {
+ int x = 0, y = 0, z = 0;
+ int S = 1, M = 2, L = 3, XL = 4;
+ if (getHeight() <= 168) {
+  x = S;
+ }
+ if (getHeight() > 168&&getHeight()<=175) {
+  x = M;
+ }
+ if (getHeight() > 175 && getHeight() <= 181) {
+  x = L;
+ }
+ if (getHeight() >181) {
+  x = XL;
+ }
+ if (getChestCircumference() <= 91) {
+  y = S;
+ }
+ if (getChestCircumference() > 91 && getChestCircumference() <= 96) {
+  y = M;
+ }
+ if (getChestCircumference() > 96 && getChestCircumference() <= 101) {
+  y = L;
+ }
+ if (getChestCircumference() > 101 ) {
+  y = XL;
+ }
+ if (getWalstline() <= 77) {
+  z = S;
+ }
+ if (getWalstline() > 77 && getWalstline() <= 82) {
+  z = M;
+ }
+ if (getWalstline() > 82 && getWalstline() <= 87) {
+  z = L;
+ }
+ if (getWalstline() > 88) {
+  z = XL;
+ }
+ int n = x;
+ if (y>n) {
+  n = y;
+ }
+ if (z>n) {
+  n = z;
+ }
+ if (n == 1) {
+  cout << "你的尺碼為:S" << endl;
+ }
+ else if (n == 2) {
+  cout << "你的尺碼為:M" << endl;
+ }
+ else if (n == 3) {
+  cout << "你的尺碼為:L" << endl;
+ }
+ else if (n == 4) {
+  cout << "你的尺碼為:XL" << endl;
+ }
+}
+
+boyType.h
+
+#ifndef GG
+#define GG
+#include<iostream>
+#include<iomanip>
+using namespace std;
+class Type {
+public:
+ Type();
+ Type(int);
+ void setClothing(int);
+ int getClothing();
+ void invertedTrapezoid();
+ void rectangle();
+ void oval();
+private:
+ int clothing;
+};
+#endif
+
+boyType.cpp
+
+#include"boyType.h"
+
+Type::Type()
+{
+ clothing = 0;
+}
+
+
+Type::Type(int newClothing)
+{
+ clothing = newClothing;
+
+ }
+
+void Type::setClothing(int newClothing)
+{
+ clothing = newClothing;
+}
+
+int Type::getClothing()
+{
+ return clothing;
+}
+
+void Type::invertedTrapezoid()
+{
+ if (clothing == 1) {
+  cout << endl;
+  cout << "合適款式: " << "緊身T恤、修身襯衫、單寧外套" << endl;
+  cout << "款式建議: " << "避免寬鬆或蓬鬆的上衣，以免遮蓋身材特點";
+ }
+ else {
+  cout << endl;
+  cout << "合適款式: " << "直筒褲、修身褲、細身牛仔褲" << endl;
+  cout << "款式建議: " << "避免寬鬆或寬腿的褲子，以免造成上下身比例不協調";
+ }
+}
+
+void Type::rectangle()
+{
+ if (clothing == 1) {
+  cout << endl;
+  cout << "合適款式: " << "V領或開襯領、合身且不緊身的上衣" << endl;
+  cout << "款式建議: " << "有結構感的袖子，以增加肩膀寬度，避免水平條紋的衣服，以免加強身材的直線感";
+ }
+ else {
+  cout << endl;
+  cout << "合適款式: " << "直筒褲、高腰褲、稍微寬鬆的牛彩褲" << endl;
+  cout << "款式建議: " << "單色褲子可以使整體視覺更簡潔";
+ }
+}
+
+void Type::oval()
+{
+
+ if (clothing == 1) {
+  cout << endl;
+  cout << "合適款式:" << "寬鬆棉質上衣、寬領T恤、牛仔襯衫" << endl;
+  cout << "款式建議:" << "避免過度凸顯腹部，深色衣服可以營造視覺上的修飾效果，可搭配外套以拉長身材線條";
+ }
+ else {
+  cout << endl;
+  cout << "合適款式:" << "深色牛仔褲、豎腳運動褲、深色卡其褲" << endl;
+  cout << "款式建議:" << "避免不高過膝蓋的短褲，褲子不能褶皺";
+ }
+}
