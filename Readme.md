@@ -25,5 +25,8 @@
 ## **程式碼執行方式**
 >**將程式碼放到如Visual Studio等等的軟體中執行，由小黑窗進行輸入輸出即可**
 ## **程式畫面截圖**
+>![螢幕擷取畫面 2023-06-04 183528](https://github.com/shangyu103/clothing-filter/assets/127190166/18fc1356-dc46-4b84-a09b-7d51cd570368)  
+>![螢幕擷取畫面 2023-06-04 183703](https://github.com/shangyu103/clothing-filter/assets/127190166/bc61fbac-9a0d-4b11-9eeb-c55bcc87f5c1)
+
 ## **分工資訊**
 >![螢幕擷取畫面 2023-06-03 150951](https://github.com/shangyu103/clothing-filter/assets/127190166/65971d1f-fa4d-4bc0-9986-86e8336d6b3f)
